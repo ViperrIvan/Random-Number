@@ -12,22 +12,34 @@ def binary_search(data, elem):
         else:
             low = middle + 1
     return -1
-random_list=[randint(1, 100)for i in range(10)]
-set(random_list)
-random_list.sort()
-random_number=randint(0, 9)
-print(random_number)
-print(random_list)
-tic=time.perf_counter()
-while True:
-    timeNow=time.gmtime(0)
-    i = int(input('Попробуйте угадать число: '))
-    if binary_search(random_list, i)==random_number:
-        print('Ты угадал!')
-        toc=time.perf_counter()
-        print(f'Вы угадали число за {int(round(toc-tic))} секунд')
+def generateNumber():
+    global random_list
+    global random_number
+    random_list = [randint(1, 100)for i in range(10)]
+    set(random_list)
+    random_list.sort()
+    random_number=randint(0, 9)
+    print(random_number)
+    print(random_list)
+def answer(random_list1, random_number1):
+    tic = time.perf_counter()
+    while True:
+        i = int(input('Попробуйте угадать число: '))
+        if binary_search(random_list1, i)==random_number1:
+            print('Ты угадал!')
+            toc=time.perf_counter()
+            print(f'Вы угадали число за {int(round(toc-tic))} секунд')
+            break
+        elif binary_search(random_list1, i)<=random_number1:
+            print('Не угадал, попробуй число больше!')
+        elif binary_search(random_list, i)>=random_number:
+            print('Не угадал, попробуй число меньше!')
+    if input("Хотите продолжить игру? ")=='да':
+        generateNumber()
+        answer(random_list, random_number)
+    else:
         quit()
-    elif binary_search(random_list, i)<=random_number:
-        print('Не угадал, попробуй число больше!')
-    elif binary_search(random_list, i)>=random_number:
-        print('Не угадал, попробуй число меньше!')
+random_list=[]
+random_number=[]
+generateNumber()
+answer(random_list, random_number)
