@@ -1,4 +1,5 @@
 from random import randint
+import time
 def binary_search(data, elem):
     low = 0
     high = len(data) - 1
@@ -12,14 +13,19 @@ def binary_search(data, elem):
             low = middle + 1
     return -1
 random_list=[randint(1, 100)for i in range(10)]
+set(random_list)
 random_list.sort()
-random_number=randint(0, 10)
+random_number=randint(0, 9)
 print(random_number)
 print(random_list)
+tic=time.perf_counter()
 while True:
+    timeNow=time.gmtime(0)
     i = int(input('Попробуйте угадать число: '))
     if binary_search(random_list, i)==random_number:
         print('Ты угадал!')
+        toc=time.perf_counter()
+        print(f'Вы угадали число за {int(round(toc-tic))} секунд')
         quit()
     elif binary_search(random_list, i)<=random_number:
         print('Не угадал, попробуй число больше!')
